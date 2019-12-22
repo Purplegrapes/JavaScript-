@@ -1,8 +1,13 @@
-import createObject from './new';
+import { shallowEqual } from './shallow-equal';
 
-function func(age) {
-  this.name = 'JUNE';
-  this.age = age;
+const A = {
+  name: 'a',
+  colors: 'blue',
+  
 }
-const obj2 = createObject(func, '24')
-console.log(obj2.name)
+const B = {
+  name: 'b',
+  colors: 'blue',
+  
+}
+console.log(shallowEqual(A, B))
