@@ -1,9 +1,18 @@
-import { join } from 'lodash';
+import 'regenerator-runtime/runtime';
+import 'react-hot-loader';
+import React from 'react';
+import { Provider } from 'react-redux';
 
-function createSpan(){
-    const element = document.createElement('span');
-    element.innerHTML = join(['Hello', 'DllPlugindddd'], ' , ');
-    return element;
-}
+import ReactDOM from 'react-dom';
+import App from './root/app';
+import store from './create-store';
+const render = Component => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Component />
+    </Provider>,
+    document.getElementById('root'),
+  );
+};
 
-document.querySelector('#root').appendChild(createSpan());
+render(App);

@@ -1,9 +1,18 @@
 {
-    "presets": ["env"],
-    "env": {
-      "debug": {
-        "sourceMaps": "inline",
-        "retainLines": true
-      }
-    }
-  }
+  "presets": [
+    "@babel/preset-react",
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    "lodash",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    "@babel/plugin-syntax-dynamic-import",
+    
+    ["import", {
+      "libraryName": "antd",
+      "libraryDirectory": "es",
+      "style": "css"
+    }]
+  ]
+}
