@@ -1,7 +1,8 @@
 Function.prototype.myCall = function(context, ...args) {
-  if (this === Function.prototype) {
-    throw new Error('noe')
+  if (typeof this !== 'function') {
+    throw new Error('need function')
   }
+  context = context || window;
   const fn = Symbol();
   context[fn] = this;
   let result;

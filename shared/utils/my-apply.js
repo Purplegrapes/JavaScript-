@@ -1,8 +1,11 @@
+const { result } = require("lodash");
+
 Function.prototype.myApply = function(context, args) {
-  if (this === Function.prototype) {
-    throw new Error('noe')
+  if (typeof this !== 'function') {
+    throw new Error('need function')
   }
   const fn = Symbol();
+  context = context || window;
   context[fn] = this;
   let result;
   if(args) {

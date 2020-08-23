@@ -12,7 +12,6 @@ const WEB_ENV = process.env.target === 'web';
 const LIBS = [
   'react',
   'react-dom',
-  'react-intl',
   'react-redux',
   'react-router',
   'react-router-redux',
@@ -20,7 +19,6 @@ const LIBS = [
   'redux-actions',
   'recompose',
   'reselect',
-  'intl',
   'lodash',
 ];
 

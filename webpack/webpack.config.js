@@ -5,16 +5,18 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AutoDllPlugin = require('autodll-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const { styleConfig } = require('./style-loader');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const {
   WEB_BABEL_LOADER,
   FILE_LOADER,
   ROOT_PATH,
   THREAD_LOADER,
+  LIBS,
 } = require('./constants');
-module.exports = {
+const createConfig = () => ({
   entry: {
-    app: './src/index.js'
+    app: 'src/index.js'
   },
   mode: process.env.mode,
   output: {
@@ -24,22 +26,11 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-        template: path.resolve(__dirname,'..', 'index.html')
+      inject: true,
+      template: path.resolve(__dirname, '..', 'index.html')
     }),
-    // new webpack.DllReferencePlugin({
-    //     // 描述 lodash 动态链接库的文件内容
-    //     manifest: require('../dist/lodash.manifest.json')
-    // })
-    new AutoDllPlugin({
-      inject: true, // 设为 true 就把 DLL bundles 插到 index.html 里
-      filename: '[name].dll.js',
-      context: path.resolve(__dirname, '../'), // AutoDllPlugin 的 context 必须和 package.json 的同级目录，要不然会链接失败
-      entry: {
-        // 将 lodash 模块作为入口编译成动态链接库
-        lodash: ['lodash']
-      },
-    }),
-    new HardSourceWebpackPlugin(),
+  new HardSourceWebpackPlugin(),
+  new BundleAnalyzerPlugin(),
   ],
   devtool: 'inline-source-map',
   resolve: {
@@ -54,6 +45,31 @@ module.exports = {
       'babel-core': path.resolve(path.join(__dirname, '../node_modules/@babel/core')),
     },
     mainFields: ['browser', 'module', 'main'],
+  },
+  optimization: {
+    runtimeChunk: {
+      name: 'manifest',
+    },
+    splitChunks: {
+      cacheGroups: {
+        antd: {
+          name: 'antd',
+          test: /_\.less$/,
+          chunks: 'all',
+          enforce: true,
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          chunks: 'all',
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true,
+        },
+      },
+    },
   },
   module: {
     rules: [
@@ -83,4 +99,5 @@ module.exports = {
     port: '8080',
     host: 'localhost'
 }
-};
+});
+module.exports = createConfig();

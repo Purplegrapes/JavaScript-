@@ -6,7 +6,7 @@ const observable = obj => new Proxy(obj, {
     callbacks.forEach(observe => observe());   
      return result;
    },
-   get: function(target, propKey) {
+  get: function(target, propKey) {
     if (propKey in target) {
       return target[propKey];
     } else {

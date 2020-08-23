@@ -4,6 +4,8 @@ import { prop } from 'lodash/fp';
 
 import Button from 'antd/lib/button';
 import { connect } from 'react-redux';
+import _ from 'shared/utils/my-bind';
+
 import {
   init as initAction,
 } from './actions';
