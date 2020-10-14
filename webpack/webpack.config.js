@@ -2,17 +2,17 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const webpack = require('webpack');
 // const CleanWebpackPlugin = require('clean-webpack-plugin
-const AutoDllPlugin = require('autodll-webpack-plugin');
+// const AutoDllPlugin = require('autodll-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const { styleConfig } = require('./style-loader');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const {
   WEB_BABEL_LOADER,
   FILE_LOADER,
   ROOT_PATH,
   THREAD_LOADER,
-  LIBS,
+  DEBUG,
 } = require('./constants');
 const createConfig = () => ({
   entry: {
@@ -29,8 +29,11 @@ const createConfig = () => ({
       inject: true,
       template: path.resolve(__dirname, '..', 'index.html')
     }),
+    new MiniCssExtractPlugin({
+      filename: DEBUG ? '[name].css' : '[name].[hash].css',
+      chunkFilename: DEBUG ? '[name].css' : '[name].[hash].css',
+    }),
   new HardSourceWebpackPlugin(),
-  new BundleAnalyzerPlugin(),
   ],
   devtool: 'inline-source-map',
   resolve: {

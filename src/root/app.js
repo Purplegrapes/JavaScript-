@@ -4,11 +4,10 @@ import { prop } from 'lodash/fp';
 
 import Button from 'antd/lib/button';
 import { connect } from 'react-redux';
-import _ from 'shared/utils/my-bind';
-
 import {
   init as initAction,
 } from './actions';
+import style from './index.less';
 
 export default compose(
   connect(state => prop('root')(state), {
@@ -18,8 +17,8 @@ export default compose(
   init,
   buttonName,
 }) => (
-  <div className="todo-app">
-    <h1>Todo List</h1>
+  <div className={style.Flex}>
+    <div className={style.Flex1}>Todo List</div>
     <Button onClick={init}>
       {buttonName}
     </Button>

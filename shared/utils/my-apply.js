@@ -1,4 +1,3 @@
-const { result } = require("lodash");
 
 Function.prototype.myApply = function(context, args) {
   if (typeof this !== 'function') {

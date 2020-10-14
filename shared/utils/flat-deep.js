@@ -9,5 +9,3 @@ const flatDeep = (array, deep = 2) => {
   }
   return array.slice();
 }
-var s = flatDeep([2, [2, [3, 4]], 4])
-console.log(s)
