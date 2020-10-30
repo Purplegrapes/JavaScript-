@@ -1,37 +1,20 @@
-let Person = {
-  name: 'Tom',
-  say() {
-      console.log(this)
-      console.log(this.name)
-  }
-}
-Person1 = {
-  name: 'Tom1'
-}
-//如果没有参数
+Function.prototype._bind = function (context) {
 
-Function.prototype.Mybind = function(context) {
-  //返回一个绑定this的函数，我们需要在此保存this
-  // 判断调用对象是否为函数
   if (typeof this !== "function") {
-    throw new TypeError("Error");
+    throw new Error("Function.prototype.bind - what is trying to be bound is not callable");
   }
-  console.log(this)
-  let self = this
-      // 可以支持柯里化传参，保存参数
-  let arg = [...arguments].slice(1)
-  console.log(arg)
-      // 返回一个函数
-  return function() {
-      //同样因为支持柯里化形式传参我们需要再次获取存储参数
-      let newArg = [...arguments]
-      console.log(newArg)
-          // 返回函数绑定this，传入两次保存的参数
-          //考虑返回函数有返回值做了return
-      return self.apply(context, arg.concat(newArg))
-  }
-}
 
-// 搞定测试
-let fn = Person.say.Mybind(Person1)
-fn(23)
+  var self = this;
+  var args = [...arguments].slice(1);
+
+  var fNOP = function () {};
+
+  var fBound = function () {
+      var bindArgs = [...arguments];
+      return self.apply(this instanceof fNOP ? this : context, args.concat(bindArgs));
+  }
+
+  fNOP.prototype = this.prototype;
+  fBound.prototype = new fNOP();
+  return fBound;
+}

@@ -15,3 +15,17 @@ Function.prototype.myCall = function(context, ...args) {
   return result;
 
 }
+
+const obj = {
+  value: 'xx'
+}
+
+function Func(name, age) {
+  return ({
+    name,
+    age,
+    value: this.value,
+  })
+}
+Func.myCall(obj);
+Func.call(obj);

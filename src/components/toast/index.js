@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Toast from './toast'
-import './toast.css'
+import './toast.less'
 
 function createNotification() {
   const div = document.createElement('div')
