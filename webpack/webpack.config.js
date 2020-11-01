@@ -100,7 +100,16 @@ const createConfig = () => ({
   devServer: {
     contentBase: [path.resolve(__dirname, '..', 'dist')],
     port: '8080',
-    host: 'localhost'
+    host: 'localhost',
+    proxy: {
+      // TODO  need proxy url
+      // '/api': 'http://192.168.0.160:80',
+      '/': {
+        target: 'http://localhost:3000',
+        changeOrigin: true,
+      },
+    },
+    hot: true,
 }
 });
 module.exports = createConfig();

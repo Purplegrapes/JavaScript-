@@ -1,10 +1,10 @@
 import { handleActions } from 'redux-actions';
-import { INIT } from './actions';
+import { GET_INFO } from './actions';
 
 export default handleActions({
-  [INIT]: (state) => ({
+  [GET_INFO]: (state, { payload }) => ({
     ...state,
-    buttonName: 'after',
+    ...payload,
   }),
 }, {
   buttonName: 'befror'

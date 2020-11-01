@@ -48,7 +48,10 @@
     "redux": "4.0.4",
     "redux-actions": "2.6.5",
     "reselect": "3.0.1",
-    "reselect-map": "1.0.3"
+    "reselect-map": "1.0.3",
+    "qs": "6.3.0",
+    "whatwg-fetch": "2.0.1",
+    "redux-thunk": "^2.3.0"
   },
   "devDependencies": {
     "@babel/cli": "7.8.4",
