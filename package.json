@@ -3,20 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "sideEffects": false,
   "scripts": {
     "build:dll": "webpack -p --config webpack/webpack.dll.config.js",
-    "build:dev": "better-npm-run build:dev",
-    "build:prod": "better-npm-run build:prod"
+    "start": "better-npm-run start:devServer",
+    "build": "better-npm-run build"
   },
   "betterScripts": {
-    "build:dev": {
+    "start:devServer": {
       "command": "babel-node  --max_old_space_size=6144 ./node_modules/webpack-dev-server/bin/webpack-dev-server.js --config ./webpack/webpack.config.js --colors",
       "env": {
         "mode": "development"
       }
     },
-    "build:prod": {
-      "command": "webpack -p --config webpack/webpack.config.js --display-error-details --progress --colors",
+    "build": {
+      "command": "babel-node --max_old_space_size=4096 ./node_modules/webpack-cli/bin/cli.js --config ./webpack/webpack.config.js --progress --colors --display-error-details --display-used-exports",
       "env": {
         "mode": "production"
       }

@@ -51,15 +51,11 @@ export default () => next => action => {
       url,
       ...options
     } = payload;
-    
       const body = prop('body')(options);
       const startRequest = new Date().getTime();
-      let presetPromise = Promise.resolve(body);
-      return presetPromise.then((res) => {
-        fetch(url, {
-          ...options,
-          body: res,
-        })
+      return fetch(url, {
+        ...options,
+        body,
       }).then(checkStatus)
         .then(response => {
           // success

@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const { styleConfig } = require('./style-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const {
   WEB_BABEL_LOADER,
@@ -20,11 +21,15 @@ const createConfig = () => ({
   },
   mode: process.env.mode,
   output: {
-    filename: '[name].chunk.js',
-    chunkFilename: '[name].chunk.js',
+    filename: DEBUG ? '[name].chunk.js' : '[name].[hash].chunk.js',
+    chunkFilename: DEBUG ? '[name].chunk.js' : '[name].[hash].chunk.js',
     path: path.resolve(__dirname, '..', 'dist')
   },
   plugins: [
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname, '../'),
+      verbose: true,
+    }),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(__dirname, '..', 'index.html')
@@ -41,7 +46,6 @@ const createConfig = () => ({
     extensions: ['.js', '.scss', '.less'],
     alias: {
       shared: path.resolve(ROOT_PATH, 'shared'),
-      locales: path.resolve(ROOT_PATH, 'locales'),
       src: path.resolve(ROOT_PATH, 'src'),
       'react-dom': path.resolve(path.join(__dirname, '../node_modules/@hot-loader/react-dom')),
       'react-hot-loader': path.resolve(path.join(__dirname, '../node_modules/react-hot-loader')),
@@ -50,6 +54,7 @@ const createConfig = () => ({
     mainFields: ['browser', 'module', 'main'],
   },
   optimization: {
+    usedExports: true,
     runtimeChunk: {
       name: 'manifest',
     },
@@ -97,17 +102,14 @@ const createConfig = () => ({
       ...FILE_LOADER,
     ],
   },
+  target: 'web',
+ 
   devServer: {
     contentBase: [path.resolve(__dirname, '..', 'dist')],
-    port: '8080',
+    port: '3008',
     host: 'localhost',
     proxy: {
-      // TODO  need proxy url
-      // '/api': 'http://192.168.0.160:80',
-      '/': {
-        target: 'http://localhost:3000',
-        changeOrigin: true,
-      },
+      '/api': 'http://localhost:3002'
     },
     hot: true,
 }

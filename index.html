@@ -9,15 +9,22 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no, viewport-fit=cover">
+  <script src="http://localhost:3002/callback"></script>
   <script> 
-  // jsonp 解决跨域问题
-  function callback(res) {
-    console.log(res);
-   }
-  </script>    
-  <script src="http://www.baidu.cn/login?username=TianTianUp&callback=callback"></script>
-  
-  
+    // jsonp 解决跨域问题
+    function callback(res) {
+      alert(res);
+     }
+    </script>  
+    <script>
+      let socket = new WebSocket('ws://localhost:3000');
+      socket.onopen = function () {
+        socket.send('我爱你');//向服务器发送数据
+      }
+      socket.onmessage = function (e) {
+        console.log(e.data);//接收服务器返回的数据
+      }
+  </script>
 </head>
 <body>
   <div id="root" style="position:relative">
