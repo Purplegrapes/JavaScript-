@@ -1,14 +1,18 @@
-var dragging = false
-var position = null
-const box = document.getElementById('content');
+import React, { useRef } from 'react';
+import style from './index.less';
 
-box.addEventListener('mousedown',function(e){
+export const DragBox = () => {
+  const dragRef = useRef();
+  var dragging = false
+var position = null
+const onMouseDown = (e) => {
   dragging = true
   position = [e.clientX, e.clientY]
-})
-
+}
 
 document.addEventListener('mousemove', function(e){
+const box = dragRef.current;
+
   if(dragging === false) return null
   const x = e.clientX
   const y = e.clientY
@@ -23,3 +27,12 @@ document.addEventListener('mousemove', function(e){
 document.addEventListener('mouseup', function(){
   dragging = false
 })
+  return (
+    <div
+    className={style.Box}
+    onMouseDown={onMouseDown}
+    ref={dragRef}
+  >
+  </div>
+  )
+}

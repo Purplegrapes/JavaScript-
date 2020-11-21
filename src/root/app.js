@@ -15,7 +15,7 @@ import {
   getInfo as getInfoAction,
 } from './actions';
 import style from './index.less';
-
+import { DragBox } from '../components/app';
 
 export default compose(
   connect(state => prop('root')(state), {
@@ -27,7 +27,6 @@ export default compose(
 )(({ clickLi }) => {
   const animationRef = useRef();
   const ulRef = useRef();
-  const dragRef = useRef();
 
   return (
     <div>
@@ -46,11 +45,7 @@ export default compose(
           0%
         </div>
       </div>
-      <div
-        className={style.Box}
-        ref={dragRef}
-      >
-      </div>
+      <DragBox />
   </div>
   )
 })
