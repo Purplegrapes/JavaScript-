@@ -4,9 +4,11 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 import ReactDOM from 'react-dom';
+import 'antd/dist/antd.css'
 import App from './root/app';
 import store from './create-store';
 import '../shared/utils/temp';
+
 
 const render = Component => {
   ReactDOM.render(

@@ -34,7 +34,8 @@
   },
   "homepage": "https://github.com/Purplegrapes/JavaScript-deep#readme",
   "dependencies": {
-    "antd": "3.23.6",
+    "@ant-design/icons": "4.1.0",
+    "antd": "4.8.4",
     "classnames": "~2.2.0",
     "es6-promise": "4.0.5",
     "lodash": "4.17.15",
