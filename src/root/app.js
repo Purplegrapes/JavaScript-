@@ -7,15 +7,14 @@ import { prop } from 'lodash/fp';
 import classnames from 'classnames';
 import Button from 'antd/lib/button';
 import { connect } from 'react-redux';
-import 'shared/utils/temp';
-
-import { insertData, runProgress } from 'shared/utils/request-animation-frame';
+// import 'shared/utils/temp.ts';
+import { start, insertData, runProgress } from 'shared/utils/request-animation-frame';
 
 import {
   getInfo as getInfoAction,
 } from './actions';
 import style from './index.less';
-import { DragBox } from '../components/app';
+import { DragBox } from '../components/drag-box';
 
 export default compose(
   connect(state => prop('root')(state), {
@@ -30,6 +29,7 @@ export default compose(
 
   return (
     <div>
+    <DragBox />
       <div>
         <Button onClick={() => insertData(ulRef.current)}>
           插入
@@ -45,7 +45,21 @@ export default compose(
           0%
         </div>
       </div>
-      <DragBox />
+     
+      <Button onClick={start}>
+       滚动
+    </Button>
+      <div className={style.View}>
+        <div id="scorll" className={style.Scroll}>
+            <span>item item1</span>
+            <span>item item1</span>
+            <span>item item1</span>
+            <span>item item1</span>
+            <span>item item1</span>
+            
+        </div>
+</div>
+
   </div>
   )
 })

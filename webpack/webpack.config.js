@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const { styleConfig } = require('./style-loader');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+// const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const {
   WEB_BABEL_LOADER,
@@ -26,10 +26,6 @@ const createConfig = () => ({
     path: path.resolve(__dirname, '..', 'dist')
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      root: path.resolve(__dirname, '../'),
-      verbose: true,
-    }),
     new HtmlWebpackPlugin({
       inject: true,
       template: path.resolve(__dirname, '..', 'index.html')
