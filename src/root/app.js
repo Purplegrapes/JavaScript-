@@ -7,9 +7,8 @@ import { prop } from 'lodash/fp';
 import classnames from 'classnames';
 import Button from 'antd/lib/button';
 import { connect } from 'react-redux';
-// import 'shared/utils/temp.ts';
+import 'shared/utils/temp';
 import { start, insertData, runProgress } from 'shared/utils/request-animation-frame';
-
 import {
   getInfo as getInfoAction,
 } from './actions';
@@ -21,9 +20,8 @@ export default compose(
     getInfo: getInfoAction,
   }),
   withHandlers({
-    
   }),
-)(({ clickLi }) => {
+)(({ clickLi, handleOutput }) => {
   const animationRef = useRef();
   const ulRef = useRef();
 

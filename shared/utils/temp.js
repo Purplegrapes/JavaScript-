@@ -1,15 +1,19 @@
-var reverseString = function(s, target) {
-    let left = 0;
-    let right = s.length - 1;
-    while(left < right) {
-        const sum = s[left] + s[right];
-        if (sum === target) {
-            return [left + 1, right + 1];
-        } else {
-            left++;
-            right--;
+const s = (fasthead) => {
+    
+    let fast = head;
+    let slow = head;
+    while(fast && fast.next) {
+        slow = slow.next;
+        fast = fast.next.next;
+        if (slow === fast) {
+            break;
         }
     }
-    return null;
-};
-reverseString(['h','e', 'l'])
+   
+    slow = head;
+    while(slow!==fast) {
+        slow = slow.next;
+        fast = fast.next;
+    }
+    return slow;
+}
