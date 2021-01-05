@@ -16,3 +16,17 @@ Function.prototype.myApply = function(context, args) {
   return result;
 
 }
+
+const func = function(value) {
+  this.name = 'func';
+  return ({
+    name: this.name,
+    value,
+  })
+};
+
+const obj = ({
+  name: 'obj'
+})
+console.log(func(10))
+console.log(func.call(obj, 20))

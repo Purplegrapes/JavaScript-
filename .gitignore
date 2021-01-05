@@ -3,3 +3,4 @@ dist/
 dll/
 .vscode
 package-lock.json
+coverage/

@@ -56,3 +56,24 @@ const getMiddleNode = function(head) {
   return slow;
 }
 
+const isPalindrome = function(head) {
+   let cur = head;
+   let arr = [];
+   if (!head || !head.next) {
+     return false;
+   }
+   while(cur) {
+     arr.push[cur.val];
+     cur = cur.next;
+   }
+   let left = 0;
+   let right = arr.length - 1;
+   while(left<right) {
+     if (arr[left] !== arr[right]) {
+       return false;
+     }
+     left++;
+     right--;
+   }
+   return true;
+}
