@@ -39,7 +39,7 @@ const createConfig = () => ({
   devtool: 'inline-source-map',
   resolve: {
     aliasFields: ['browser'],
-    extensions: ['.js', '.scss', '.less'],
+    extensions: ['.ts', '.js', '.scss', '.less'],
     alias: {
       shared: path.resolve(ROOT_PATH, 'shared'),
       src: path.resolve(ROOT_PATH, 'src'),
@@ -77,6 +77,21 @@ const createConfig = () => ({
   },
   module: {
     rules: [
+      {
+        test: /\.(tsx|ts)$/,
+        loader: 'ts-loader',
+        options: {
+          configFile: path.resolve(__dirname, '../ts.config.json')
+        },
+        exclude: [
+          /-webworker\.js$/,
+          path.resolve(ROOT_PATH, 'node_modules'),
+          path.resolve(ROOT_PATH, 'app'),
+          path.resolve(ROOT_PATH, 'dist'),
+          path.resolve(ROOT_PATH, 'dll'),
+          path.resolve(ROOT_PATH, 'webpack'),
+        ],
+      },
       {
         test: /\.js$/,
         exclude: [
